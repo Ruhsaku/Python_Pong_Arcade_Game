@@ -1,4 +1,5 @@
-from turtle import Turtle, Screen
+from turtle import Screen
+from paddle import Paddle
 
 # Create and modify the screen
 screen = Screen()
@@ -8,31 +9,18 @@ screen.title("My Pong Arcade Game!")
 screen.tracer(0)
 
 # Variables
-position = (350, 0)
+
 game_is_on = True
 
 # Create a paddle
-paddle = Turtle()
-paddle.shape("square")
-paddle.color("white")
-paddle.shapesize(stretch_wid=5, stretch_len=1)
-paddle.penup()
-paddle.goto(position)
-
-
-def go_up():
-    new_y = paddle.ycor() + 20
-    paddle.goto(paddle.xcor(), new_y)
-
-
-def go_down():
-    new_y = paddle.ycor() - 20
-    paddle.goto(paddle.xcor(), new_y)
-
+paddle1 = Paddle((350, 0))
+paddle2 = Paddle((-350, 0))
 
 screen.listen()
-screen.onkey(fun=go_up, key="Up")
-screen.onkey(fun=go_down, key="Down")
+screen.onkey(fun=paddle1.go_up, key="Up")
+screen.onkey(fun=paddle1.go_down, key="Down")
+screen.onkey(fun=paddle2.go_up, key="w")
+screen.onkey(fun=paddle2.go_down, key="s")
 
 while game_is_on:
     screen.update()
